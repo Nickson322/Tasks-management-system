@@ -15,6 +15,7 @@ public class UserService {
 
     public User create(UserDTO userDTO){
         User user = User.builder()
+                .name(userDTO.getName())
                 .login(userDTO.getLogin())
                 .password(userDTO.getPassword())
                 .build();

@@ -34,3 +34,4 @@ build/
 
 ### Migrations
 /src/main/resources/db/migration/
+/src/main/resources/migrations/
