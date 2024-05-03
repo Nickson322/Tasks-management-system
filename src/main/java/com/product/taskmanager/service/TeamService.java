@@ -26,6 +26,10 @@ public class TeamService {
         return teamRepository.findAll();
     }
 
+    public Team getTeam(String name){
+        return teamRepository.findByName(name);
+    }
+
     public Team update(Team team){
         return teamRepository.save(team);
     }
