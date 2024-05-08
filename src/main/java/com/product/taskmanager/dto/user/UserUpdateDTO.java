@@ -13,7 +13,5 @@ public class UserUpdateDTO {
 
     private String password;
 
-    private String login;
-
     private String teamName;
 }
