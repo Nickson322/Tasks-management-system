@@ -1,6 +1,6 @@
 package com.product.taskmanager.service;
 
-import com.product.taskmanager.dto.TaskCreateDTO;
+import com.product.taskmanager.dto.task.TaskCreateDTO;
 import com.product.taskmanager.model.Task;
 import com.product.taskmanager.repository.TaskRepository;
 import lombok.AllArgsConstructor;

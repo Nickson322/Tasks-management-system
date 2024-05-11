@@ -1,8 +1,10 @@
 package com.product.taskmanager.service;
 
-import com.product.taskmanager.dto.TeamDTO;
+import com.product.taskmanager.dto.request.TeamCreationRequest;
+import com.product.taskmanager.dto.response.TeamCreationResponse;
+import com.product.taskmanager.dto.response.TeamReadResponse;
+import com.product.taskmanager.mapper.TeamMapper;
 import com.product.taskmanager.model.Team;
-import com.product.taskmanager.model.User;
 import com.product.taskmanager.repository.TeamRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,12 +16,18 @@ import java.util.List;
 public class TeamService {
     private final TeamRepository teamRepository;
 
-    public Team create(TeamDTO teamDTO){
-        Team team = Team.builder()
-                .name(teamDTO.getName())
-                .build();
+    public TeamCreationResponse createTeam(TeamCreationRequest teamCreationRequest){
+        Team team = TeamMapper.INSTANCE.teamCreationRequestToTeam(teamCreationRequest);
 
-        return teamRepository.save(team);
+        team = teamRepository.save(team);
+
+        return TeamMapper.INSTANCE.teamToTeamCreationResponse(team);
+    }
+
+    public TeamReadResponse readTeam(String name){
+        Team team = teamRepository.findByName(name);
+
+        return TeamMapper.INSTANCE.teamToTeamReadResponse(team);
     }
 
     public List<Team> readAll(){

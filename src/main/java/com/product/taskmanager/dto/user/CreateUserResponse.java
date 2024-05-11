@@ -1,16 +1,13 @@
 package com.product.taskmanager.dto.user;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
-public class UserUpdateDTO {
+@Accessors(chain = true)
+public class CreateUserResponse {
     private String name;
-
     private String userRole;
-
     private String email;
-
-    private String password;
-
-    private String teamName;
+//    private CreateTeamResponse team;
 }

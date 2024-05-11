@@ -1,9 +1,8 @@
 package com.product.taskmanager.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
@@ -11,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Builder
+@Accessors(chain = true)
 @Entity(name = "users")
 public class User {
     @Id
@@ -26,12 +26,10 @@ public class User {
     private String email;
 
     @Column(unique = true)
-    @JsonIgnore
     private String password;
 
     //users <- team
-    @JsonBackReference
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "team_name")
     private Team team;
 
@@ -51,4 +49,14 @@ public class User {
     //users -> tasks
     @OneToMany(mappedBy = "executor")
     private List<Task> executorTasks;
+
+
+
+
+    public User(String name, String password, String userRole, String email) {
+        this.name = name;
+        this.password = password;
+        this.userRole = userRole;
+        this.email = email;
+    }
 }

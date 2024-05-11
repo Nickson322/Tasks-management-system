@@ -1,8 +1,9 @@
 package com.product.taskmanager.controller;
 
-import com.product.taskmanager.dto.TeamDTO;
+import com.product.taskmanager.dto.request.TeamCreationRequest;
+import com.product.taskmanager.dto.response.TeamCreationResponse;
+import com.product.taskmanager.dto.response.TeamReadResponse;
 import com.product.taskmanager.model.Team;
-import com.product.taskmanager.model.User;
 import com.product.taskmanager.service.TeamService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,13 @@ public class TeamController {
 
     //post
     @PostMapping
-    public ResponseEntity<Team> create(@RequestBody TeamDTO teamDTO){
-        return new ResponseEntity<>(teamService.create(teamDTO), HttpStatus.OK);
+    public TeamCreationResponse create(@RequestBody TeamCreationRequest teamCreationRequest){
+        return teamService.createTeam(teamCreationRequest);
+    }
+
+    @GetMapping("/{name}")
+    public TeamReadResponse readTeam(@PathVariable String name){
+        return teamService.readTeam(name);
     }
 
     @GetMapping

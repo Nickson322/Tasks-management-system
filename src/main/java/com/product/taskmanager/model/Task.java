@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Duration;
 import java.time.ZonedDateTime;
 
 @NoArgsConstructor
@@ -31,6 +32,8 @@ public class Task {
     private ZonedDateTime createdOn;
 
     private ZonedDateTime updatedOn;
+
+    private Duration timeSpent;
 
     private String description;
 

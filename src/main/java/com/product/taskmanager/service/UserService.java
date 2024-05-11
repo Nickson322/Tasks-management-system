@@ -1,55 +1,59 @@
 package com.product.taskmanager.service;
 
-import com.product.taskmanager.dto.UserCreateDTO;
-import com.product.taskmanager.dto.UserUpdateDTO;
+import com.product.taskmanager.dto.request.UserCreationRequest;
+import com.product.taskmanager.dto.request.UserUpdateRequest;
+import com.product.taskmanager.dto.request.UserUpdateTeamReq;
+import com.product.taskmanager.dto.response.UserCreationResponse;
+import com.product.taskmanager.dto.response.UserReadResponse;
+import com.product.taskmanager.mapper.UserMapper;
 import com.product.taskmanager.model.Team;
 import com.product.taskmanager.model.User;
 import com.product.taskmanager.repository.TeamRepository;
 import com.product.taskmanager.repository.UserRepository;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
     private final TeamRepository teamRepository;
 
-    public User create(UserCreateDTO userCreateDTO){
-        User user = User.builder()
-                .name(userCreateDTO.getName())
-                .password(userCreateDTO.getPassword())
-                .build();
+    public UserCreationResponse createUser(UserCreationRequest userCreationRequest){
+        User user = UserMapper.INSTANCE.userCreationRequestToUser(userCreationRequest);
 
-        return userRepository.save(user);
+        user = userRepository.save(user);
+
+        return UserMapper.INSTANCE.userToUserCreationResponse(user);
     }
 
-    public List<User> readAll(){
-        return userRepository.findAll();
+    public UserReadResponse readUser(String name){
+        User user = userRepository.findByName(name);
+
+        return UserMapper.INSTANCE.userToUserReadResponse(user);
     }
 
-    public User readUser(String name){
-        return userRepository.findByName(name).orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+    public void updateUser(UserUpdateRequest userUpdateRequest, Long id){
+        User userToUpdate = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+
+        userToUpdate = UserMapper.INSTANCE.updateUserFromUpdateRequest(userUpdateRequest, userToUpdate);
+
+        userRepository.save(userToUpdate);
     }
 
-    public User update(UserUpdateDTO userUpdateDTO, Long id){
-        User userToUpdate = userRepository.findById(id).orElse(null);
-        if(userToUpdate != null){
-            userToUpdate.setName(userUpdateDTO.getName());
-            userToUpdate.setUserRole(userUpdateDTO.getUserRole());
-            userToUpdate.setEmail(userUpdateDTO.getEmail());
-            userToUpdate.setPassword(userUpdateDTO.getPassword());
+    public String updateUserTeam(UserUpdateTeamReq userUpdateTeamReq, Long id){
+        User userToUpdate = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
 
-            Team team = teamRepository.findByName(userUpdateDTO.getTeamName());
-            if (team != null) userToUpdate.setTeam(team);
+        Team team = teamRepository.findByName(userUpdateTeamReq.getTeamName());
 
-            return userRepository.save(userToUpdate);
-        }
+        if(team != null) userToUpdate.setTeam(team);
 
-        return null;
+        userRepository.save(userToUpdate);
+
+        return "User connected to " + userUpdateTeamReq.getTeamName() + " team!";
     }
 
     public void delete(Long id){

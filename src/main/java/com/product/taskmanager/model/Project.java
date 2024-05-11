@@ -15,6 +15,8 @@ import java.util.List;
 @Entity(name = "projects")
 public class Project {
     @Id
+    private Long id;
+
     private String name;
 
     private String description;
