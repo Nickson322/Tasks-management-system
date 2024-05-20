@@ -21,6 +21,8 @@ public class Project {
 
     private String description;
 
+    private String leaderName;
+
 
     //project <-> users
     @ManyToMany(mappedBy = "projects")

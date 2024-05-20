@@ -1,6 +1,7 @@
 package com.product.taskmanager.controller;
 
 import com.product.taskmanager.dto.request.TeamCreationRequest;
+import com.product.taskmanager.dto.request.TeamUpdateRequest;
 import com.product.taskmanager.dto.response.TeamCreationResponse;
 import com.product.taskmanager.dto.response.TeamReadResponse;
 import com.product.taskmanager.model.Team;
@@ -18,7 +19,6 @@ import java.util.List;
 public class TeamController {
     private final TeamService teamService;
 
-    //post
     @PostMapping
     public TeamCreationResponse create(@RequestBody TeamCreationRequest teamCreationRequest){
         return teamService.createTeam(teamCreationRequest);
@@ -30,13 +30,14 @@ public class TeamController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Team>> readAll(){
-        return new ResponseEntity<>(teamService.readAll(), HttpStatus.OK);
+    public List<TeamReadResponse> readAllTeams(){
+        return teamService.readAllTeams();
     }
 
-    @PutMapping
-    public ResponseEntity<Team> update(@RequestBody Team team){
-        return new ResponseEntity<>(teamService.update(team), HttpStatus.OK);
+    @PutMapping("/{teamId}")
+    public String update(@RequestBody TeamUpdateRequest teamUpdateRequest,
+                                   @PathVariable Long teamId){
+        return teamService.update(teamUpdateRequest, teamId);
     }
 
     @DeleteMapping("/{id}")
@@ -44,5 +45,4 @@ public class TeamController {
         teamService.delete(id);
         return HttpStatus.OK;
     }
-
 }

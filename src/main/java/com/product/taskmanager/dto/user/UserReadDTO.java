@@ -9,11 +9,8 @@ import lombok.*;
 @Builder
 //@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserReadDTO {
+    private Long id;
     private String name;
     private String userRole;
     private String email;
-
-//    private List<ProjectDTO> projects;
-//    private List<TaskDTO> authorTasks;
-//    private List<TaskDTO> executorTasks;
 }

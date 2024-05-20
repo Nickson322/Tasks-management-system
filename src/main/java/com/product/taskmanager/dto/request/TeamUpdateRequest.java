@@ -7,8 +7,7 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-public class UserCreationRequest {
+public class TeamUpdateRequest {
     private String name;
-    private String password;
-    private String email;
+    private String description;
 }

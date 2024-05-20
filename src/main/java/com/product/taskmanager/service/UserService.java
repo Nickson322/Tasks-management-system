@@ -51,10 +51,13 @@ public class UserService {
 
         if(team != null) userToUpdate.setTeam(team);
 
-        userRepository.save(userToUpdate);
+        userToUpdate = userRepository.save(userToUpdate); //TODO: СРОЧНО ПРЕОБРАЗОВАТЬ В DTO
 
         return "User connected to " + userUpdateTeamReq.getTeamName() + " team!";
     }
+
+
+
 
     public void delete(Long id){
         userRepository.deleteById(id);

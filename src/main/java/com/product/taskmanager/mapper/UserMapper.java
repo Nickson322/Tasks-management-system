@@ -4,7 +4,6 @@ import com.product.taskmanager.dto.request.UserCreationRequest;
 import com.product.taskmanager.dto.request.UserUpdateRequest;
 import com.product.taskmanager.dto.response.UserCreationResponse;
 import com.product.taskmanager.dto.response.UserReadResponse;
-import com.product.taskmanager.dto.response.UserUpdateResponse;
 import com.product.taskmanager.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

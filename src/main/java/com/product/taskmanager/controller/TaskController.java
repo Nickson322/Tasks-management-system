@@ -1,6 +1,8 @@
 package com.product.taskmanager.controller;
 
-import com.product.taskmanager.dto.task.TaskCreateDTO;
+import com.product.taskmanager.dto.request.*;
+import com.product.taskmanager.dto.response.TaskCreationResponse;
+import com.product.taskmanager.dto.response.TaskReadResponse;
 import com.product.taskmanager.model.Task;
 import com.product.taskmanager.service.TaskService;
 import lombok.AllArgsConstructor;
@@ -17,18 +19,47 @@ public class TaskController {
     private final TaskService taskService;
 
     @PostMapping
-    public ResponseEntity<Task> create(@RequestBody TaskCreateDTO taskCreateDTO){
-        return new ResponseEntity<>(taskService.create(taskCreateDTO), HttpStatus.OK);
+    public TaskCreationResponse create(@RequestBody TaskCreationRequest taskCreationRequest){
+        return taskService.createTask(taskCreationRequest);
+    }
+
+    @GetMapping("/{taskId}")
+    public TaskReadResponse readTask(@PathVariable Long taskId){
+        return taskService.readTask(taskId);
     }
 
     @GetMapping
-    public ResponseEntity<List<Task>> readAll(){
-        return new ResponseEntity<>(taskService.readAll(), HttpStatus.OK);
+    public List<TaskReadResponse> readAll(){
+        return taskService.readAll();
     }
 
     @PutMapping
-    public ResponseEntity<Task> update(@RequestBody Task task){
-        return new ResponseEntity<>(taskService.update(task), HttpStatus.OK);
+    public String update(@RequestBody Task task){
+        return taskService.update(task);
+    }
+
+    @PutMapping("/{taskId}/status")
+    public String updateTaskStatus(@RequestBody TaskUpdateStatusReq taskUpdateStatusReq,
+                                   @PathVariable Long taskId){
+        return taskService.updateTaskStatus(taskUpdateStatusReq, taskId);
+    }
+
+    @PutMapping("/{taskId}/type")
+    public String updateTaskType(@RequestBody TaskUpdateTypeReq taskUpdateTypeReq,
+                                 @PathVariable Long taskId){
+        return taskService.updateTaskType(taskUpdateTypeReq, taskId);
+    }
+
+    @PutMapping("/{taskId}/timeSpent")
+    public String updateTaskTimeSpent(@RequestBody TaskUpdateTimeSpentReq taskUpdateTimeSpentReq,
+                                      @PathVariable Long taskId){
+        return taskService.updateTaskTimeSpent(taskUpdateTimeSpentReq, taskId);
+    }
+
+    @PutMapping("/{taskId}/priority")
+    public String updateTaskPriority(@RequestBody TaskUpdatePriorityReq taskUpdatePriorityReq,
+                                     @PathVariable Long taskId){
+        return taskService.updateTaskPriority(taskUpdatePriorityReq, taskId);
     }
 
     @DeleteMapping("/{id}")

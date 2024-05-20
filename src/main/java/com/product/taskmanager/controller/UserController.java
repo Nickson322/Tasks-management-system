@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/users")
@@ -19,7 +21,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserCreationResponse> createUser(@RequestBody UserCreationRequest userCreationRequest){
+    public ResponseEntity<UserCreationResponse> createUser(@RequestBody UserCreationRequest userCreationRequest,
+                                                           @RequestHeader Map<String, String> headers){
         return new ResponseEntity<>(userService.createUser(userCreationRequest), HttpStatus.CREATED);
     }
 

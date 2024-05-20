@@ -18,10 +18,10 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String name;
 
     private String description;
-
 
     //teams -> users
     @OneToMany(mappedBy = "team")

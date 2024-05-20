@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
 @NoArgsConstructor
@@ -27,25 +28,26 @@ public class Task {
 
     private String status;
 
-    private ZonedDateTime executionPeriod;
+    private LocalDate createdOn;
 
-    private ZonedDateTime createdOn;
+    private LocalDate updatedOn;
 
-    private ZonedDateTime updatedOn;
-
-    private Duration timeSpent;
+    private String timeSpent;
 
     private String description;
 
 
+    //tasks <- users
     @ManyToOne
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
     private User author;
 
+    //tasks <- users
     @ManyToOne
-    @JoinColumn(name = "executor_id")
+    @JoinColumn(name = "executor_id", referencedColumnName = "id")
     private User executor;
 
+    //tasks <- projects
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;

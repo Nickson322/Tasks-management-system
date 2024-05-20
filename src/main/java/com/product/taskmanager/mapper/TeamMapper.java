@@ -7,6 +7,8 @@ import com.product.taskmanager.model.Team;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface TeamMapper {
     TeamMapper INSTANCE = Mappers.getMapper(TeamMapper.class);
@@ -17,4 +19,6 @@ public interface TeamMapper {
 
 
     TeamReadResponse teamToTeamReadResponse(Team team);
+
+    List<TeamReadResponse> teamsToTeamReadResponse(List<Team> teams);
 }

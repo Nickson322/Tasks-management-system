@@ -49,14 +49,4 @@ public class User {
     //users -> tasks
     @OneToMany(mappedBy = "executor")
     private List<Task> executorTasks;
-
-
-
-
-    public User(String name, String password, String userRole, String email) {
-        this.name = name;
-        this.password = password;
-        this.userRole = userRole;
-        this.email = email;
-    }
 }

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -21,11 +22,9 @@ public class Sprint {
 
     private String name;
 
-    private ZonedDateTime startDate;
+    private LocalDate startDate;
 
-    private ZonedDateTime finishDate;
-
-    private String description;
+    private LocalDate endDate;
 
     private String status;
 

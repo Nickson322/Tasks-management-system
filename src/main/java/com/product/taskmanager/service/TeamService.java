@@ -1,11 +1,13 @@
 package com.product.taskmanager.service;
 
 import com.product.taskmanager.dto.request.TeamCreationRequest;
+import com.product.taskmanager.dto.request.TeamUpdateRequest;
 import com.product.taskmanager.dto.response.TeamCreationResponse;
 import com.product.taskmanager.dto.response.TeamReadResponse;
 import com.product.taskmanager.mapper.TeamMapper;
 import com.product.taskmanager.model.Team;
 import com.product.taskmanager.repository.TeamRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,16 +32,23 @@ public class TeamService {
         return TeamMapper.INSTANCE.teamToTeamReadResponse(team);
     }
 
-    public List<Team> readAll(){
-        return teamRepository.findAll();
+    public List<TeamReadResponse> readAllTeams(){
+        List<Team> teams = teamRepository.findAll();
+
+        return TeamMapper.INSTANCE.teamsToTeamReadResponse(teams);
     }
 
-    public Team getTeam(String name){
-        return teamRepository.findByName(name);
-    }
+    public String update(TeamUpdateRequest teamUpdateRequest, Long teamId){
+        Team teamToUpdate = teamRepository.findById(teamId)
+                .orElseThrow(() -> new EntityNotFoundException("Team not found with id: "
+                        + teamId));
 
-    public Team update(Team team){
-        return teamRepository.save(team);
+        teamToUpdate.setName(teamUpdateRequest.getName());
+        teamToUpdate.setDescription(teamUpdateRequest.getDescription());
+
+        teamRepository.save(teamToUpdate);
+
+        return "Команда с id: " + teamId + " успешно обновлена";
     }
 
     public void delete(Long id){
