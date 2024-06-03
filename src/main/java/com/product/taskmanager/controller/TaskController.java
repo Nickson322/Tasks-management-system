@@ -7,7 +7,6 @@ import com.product.taskmanager.model.Task;
 import com.product.taskmanager.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +14,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/tasks")
+@CrossOrigin(origins = "http://localhost:5173")
 public class TaskController {
     private final TaskService taskService;
 

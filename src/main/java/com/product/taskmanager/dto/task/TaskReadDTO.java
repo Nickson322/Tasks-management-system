@@ -1,8 +1,16 @@
 package com.product.taskmanager.dto.task;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
+@Data
+@Getter
+@Setter
 public class TaskReadDTO {
     private String name;
 
@@ -12,11 +20,11 @@ public class TaskReadDTO {
 
     private String status;
 
-    private ZonedDateTime executionPeriod;
+    private LocalDate executionPeriod;
 
-    private ZonedDateTime createdOn;
+    private LocalDate createdOn;
 
-    private ZonedDateTime updatedOn;
+    private LocalDate updatedOn;
 
     private Duration timeSpent;
 
