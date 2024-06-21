@@ -1,0 +1,127 @@
+.teams {
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    margin: 5rem auto; /* Центрируем блок по горизонтали */
+  }
+  
+  .teams h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .teams input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    width: calc(100% - 1rem);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .teams button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .teams button:hover {
+    background-color: #0056b3;
+  }
+  
+  .add-team-form {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column; /* Изменено: расположение полей формы в колонку */
+  }
+  
+  .add-team-form input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    width: calc(100% - 1.5rem);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+  }
+  
+  .add-team-form input:focus {
+    border-color: #007bff;
+  }
+  
+  .add-team-form button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-team-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .teams ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #eaeaea; /* Добавляем рамку вокруг списка */
+    border-radius: 10px; /* Закругляем углы списка */
+    max-height: 300px; /* Ограничиваем максимальную высоту списка */
+    overflow-y: auto; /* Добавляем прокрутку, если список превышает максимальную высоту */
+  }
+  
+  .teams li {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column; /* Изменено: расположение данных в колонку */
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eaeaea; /* Добавляем нижнюю границу для разделения элементов списка */
+  }
+  
+  .teams li:last-child {
+    border-bottom: none; /* Убираем нижнюю границу у последнего элемента списка */
+  }
+  
+  .team-info {
+    display: flex;
+    flex-direction: column; /* Изменено: расположение информации о команде в колонку */
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .team-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .teams li button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .teams li button:hover {
+    color: white;
+  }
+  
